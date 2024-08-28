@@ -19,3 +19,5 @@ export '/home/medication_details/medication_details_widget.dart'
     show MedicationDetailsWidget;
 export '/home/scheduled_reminders/scheduled_reminders_widget.dart'
     show ScheduledRemindersWidget;
+export '/other/n_f_c_scan_landing_page/n_f_c_scan_landing_page_widget.dart'
+    show NFCScanLandingPageWidget;
