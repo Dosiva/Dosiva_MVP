@@ -26,10 +26,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>dosivamvpdevelopment.com</string>
+        <string>dosiva.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>dosivamvpdevelopment</string>
+        <string>dosivamvp</string>
         </array>
         </dict>
     </array>
