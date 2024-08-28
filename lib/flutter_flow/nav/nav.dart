@@ -121,6 +121,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'ScheduledReminders')
               : const ScheduledRemindersWidget(),
+        ),
+        FFRoute(
+          name: 'NFCScanLandingPage',
+          path: '/nFCScanLandingPage',
+          builder: (context, params) => NFCScanLandingPageWidget(
+            nfcTag: params.getParam(
+              'nfcTag',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
