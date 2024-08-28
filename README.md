@@ -1,2 +1,7 @@
-# Dosiva_MVP
-DOSIVA MVP - Development (Flutterflow)
+# DOSIVA - MVP Development
+
+A new Flutter project.
+
+## Getting Started
+
+FlutterFlow projects are built to run on the Flutter _stable_ release.
