@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -37,14 +38,22 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
-
+  static const platform =
+      MethodChannel('com.example.flutter_application_1/nfc');
+  String nfcMessage = 'No NFC message received yet';
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
 
   @override
   void initState() {
     super.initState();
-
+    platform.setMethodCallHandler((call) async {
+      if (call.method == 'nfcMessage') {
+        setState(() {
+          nfcMessage = call.arguments as String;
+        });
+      }
+    });
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
   }
