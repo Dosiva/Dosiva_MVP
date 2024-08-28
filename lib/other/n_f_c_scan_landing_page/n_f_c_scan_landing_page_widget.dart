@@ -8,10 +8,10 @@ export 'n_f_c_scan_landing_page_model.dart';
 class NFCScanLandingPageWidget extends StatefulWidget {
   const NFCScanLandingPageWidget({
     super.key,
-    String? nfcTag,
-  }) : nfcTag = nfcTag ?? 'Ej funnen';
+    String? nfctag,
+  }) : nfctag = nfctag ?? 'Ej funnen';
 
-  final String nfcTag;
+  final String nfctag;
 
   @override
   State<NFCScanLandingPageWidget> createState() =>
@@ -118,7 +118,7 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   20.0, 16.0, 20.0, 0.0),
                               child: Text(
-                                widget.nfcTag,
+                                widget.nfctag,
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium

@@ -124,10 +124,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'NFCScanLandingPage',
-          path: '/nFCScanLandingPage',
+          path: '/land/:nfctag',
           builder: (context, params) => NFCScanLandingPageWidget(
-            nfcTag: params.getParam(
-              'nfcTag',
+            nfctag: params.getParam(
+              'nfctag',
               ParamType.String,
             ),
           ),
