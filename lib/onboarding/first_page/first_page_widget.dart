@@ -93,7 +93,6 @@ class _FirstPageWidgetState extends State<FirstPageWidget> {
                                 onPressed: () async {
                                   FFAppState().currentMedicationRegistration =
                                       UserRegisteredMedicationStruct(
-                                    medId: 0,
                                     label: 'Min Medicin',
                                     type: 'piller',
                                     remainingDoses: 0,
@@ -113,6 +112,18 @@ class _FirstPageWidgetState extends State<FirstPageWidget> {
                                     medicationDayInterval: 'annan',
                                     medicationDosage: 1,
                                     medicationTimesPerDay: 1,
+                                    reminderStartDate: getCurrentTimestamp,
+                                    startDateEnabled: false,
+                                    endDateEnabled: false,
+                                    reminderTimes: [
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          1724911200000),
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          1724941800000),
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          1724958000000)
+                                    ],
+                                    medId: 'not_generated',
                                   );
                                   FFAppState().currentActiveMedicationIndex = 0;
                                   setState(() {});
