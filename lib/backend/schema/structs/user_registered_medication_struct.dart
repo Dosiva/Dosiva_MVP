@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class UserRegisteredMedicationStruct extends BaseStruct {
   UserRegisteredMedicationStruct({
-    int? medId,
     String? label,
     String? type,
     int? remainingDoses,
@@ -25,8 +24,8 @@ class UserRegisteredMedicationStruct extends BaseStruct {
     bool? endDateEnabled,
     List<DateTime>? reminderTimes,
     String? nfcTag,
-  })  : _medId = medId,
-        _label = label,
+    String? medId,
+  })  : _label = label,
         _type = type,
         _remainingDoses = remainingDoses,
         _reminderType = reminderType,
@@ -42,16 +41,8 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         _startDateEnabled = startDateEnabled,
         _endDateEnabled = endDateEnabled,
         _reminderTimes = reminderTimes,
-        _nfcTag = nfcTag;
-
-  // "med_id" field.
-  int? _medId;
-  int get medId => _medId ?? 0;
-  set medId(int? val) => _medId = val;
-
-  void incrementMedId(int amount) => medId = medId + amount;
-
-  bool hasMedId() => _medId != null;
+        _nfcTag = nfcTag,
+        _medId = medId;
 
   // "label" field.
   String? _label;
@@ -195,9 +186,15 @@ class UserRegisteredMedicationStruct extends BaseStruct {
 
   bool hasNfcTag() => _nfcTag != null;
 
+  // "med_id" field.
+  String? _medId;
+  String get medId => _medId ?? '';
+  set medId(String? val) => _medId = val;
+
+  bool hasMedId() => _medId != null;
+
   static UserRegisteredMedicationStruct fromMap(Map<String, dynamic> data) =>
       UserRegisteredMedicationStruct(
-        medId: castToType<int>(data['med_id']),
         label: data['label'] as String?,
         type: data['type'] as String?,
         remainingDoses: castToType<int>(data['remaining_doses']),
@@ -216,6 +213,7 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         endDateEnabled: data['end_date_enabled'] as bool?,
         reminderTimes: getDataList(data['reminder_times']),
         nfcTag: data['nfc_tag'] as String?,
+        medId: data['med_id'] as String?,
       );
 
   static UserRegisteredMedicationStruct? maybeFromMap(dynamic data) =>
@@ -224,7 +222,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
           : null;
 
   Map<String, dynamic> toMap() => {
-        'med_id': _medId,
         'label': _label,
         'type': _type,
         'remaining_doses': _remainingDoses,
@@ -242,14 +239,11 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         'end_date_enabled': _endDateEnabled,
         'reminder_times': _reminderTimes,
         'nfc_tag': _nfcTag,
+        'med_id': _medId,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'med_id': serializeParam(
-          _medId,
-          ParamType.int,
-        ),
         'label': serializeParam(
           _label,
           ParamType.String,
@@ -320,16 +314,15 @@ class UserRegisteredMedicationStruct extends BaseStruct {
           _nfcTag,
           ParamType.String,
         ),
+        'med_id': serializeParam(
+          _medId,
+          ParamType.String,
+        ),
       }.withoutNulls;
 
   static UserRegisteredMedicationStruct fromSerializableMap(
           Map<String, dynamic> data) =>
       UserRegisteredMedicationStruct(
-        medId: deserializeParam(
-          data['med_id'],
-          ParamType.int,
-          false,
-        ),
         label: deserializeParam(
           data['label'],
           ParamType.String,
@@ -415,6 +408,11 @@ class UserRegisteredMedicationStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        medId: deserializeParam(
+          data['med_id'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -424,7 +422,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
   bool operator ==(Object other) {
     const listEquality = ListEquality();
     return other is UserRegisteredMedicationStruct &&
-        medId == other.medId &&
         label == other.label &&
         type == other.type &&
         remainingDoses == other.remainingDoses &&
@@ -441,12 +438,12 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         startDateEnabled == other.startDateEnabled &&
         endDateEnabled == other.endDateEnabled &&
         listEquality.equals(reminderTimes, other.reminderTimes) &&
-        nfcTag == other.nfcTag;
+        nfcTag == other.nfcTag &&
+        medId == other.medId;
   }
 
   @override
   int get hashCode => const ListEquality().hash([
-        medId,
         label,
         type,
         remainingDoses,
@@ -463,12 +460,12 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         startDateEnabled,
         endDateEnabled,
         reminderTimes,
-        nfcTag
+        nfcTag,
+        medId
       ]);
 }
 
 UserRegisteredMedicationStruct createUserRegisteredMedicationStruct({
-  int? medId,
   String? label,
   String? type,
   int? remainingDoses,
@@ -484,9 +481,9 @@ UserRegisteredMedicationStruct createUserRegisteredMedicationStruct({
   bool? startDateEnabled,
   bool? endDateEnabled,
   String? nfcTag,
+  String? medId,
 }) =>
     UserRegisteredMedicationStruct(
-      medId: medId,
       label: label,
       type: type,
       remainingDoses: remainingDoses,
@@ -502,4 +499,5 @@ UserRegisteredMedicationStruct createUserRegisteredMedicationStruct({
       startDateEnabled: startDateEnabled,
       endDateEnabled: endDateEnabled,
       nfcTag: nfcTag,
+      medId: medId,
     );

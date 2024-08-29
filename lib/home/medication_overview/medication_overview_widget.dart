@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'medication_overview_model.dart';
@@ -278,7 +279,6 @@ class _MedicationOverviewWidgetState extends State<MedicationOverviewWidget> {
                   onPressed: () async {
                     FFAppState().currentMedicationRegistration =
                         UserRegisteredMedicationStruct(
-                      medId: 0,
                       label: 'Min Medicin',
                       type: 'piller',
                       remainingDoses: 0,
@@ -307,6 +307,8 @@ class _MedicationOverviewWidgetState extends State<MedicationOverviewWidget> {
                         DateTime.fromMillisecondsSinceEpoch(1724785200000)
                       ],
                       medicationTimesPerDay: 1,
+                      medId: functions.generateMedId(
+                          FFAppState().activeMedications.toList()),
                     );
                     FFAppState().currentActiveMedicationIndex = 0;
                     FFAppState().currentMedicationIndexSet = false;

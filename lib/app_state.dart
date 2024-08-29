@@ -54,6 +54,22 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _scheduledReminders;
     });
+    _safeInit(() {
+      _medicationHistory = prefs
+              .getStringList('ff_medicationHistory')
+              ?.map((x) {
+                try {
+                  return ActiveReminderStruct.fromSerializableMap(
+                      jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _medicationHistory;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -186,6 +202,47 @@ class FFAppState extends ChangeNotifier {
   bool get currentMedicationIndexSet => _currentMedicationIndexSet;
   set currentMedicationIndexSet(bool value) {
     _currentMedicationIndexSet = value;
+  }
+
+  List<ActiveReminderStruct> _medicationHistory = [];
+  List<ActiveReminderStruct> get medicationHistory => _medicationHistory;
+  set medicationHistory(List<ActiveReminderStruct> value) {
+    _medicationHistory = value;
+    prefs.setStringList(
+        'ff_medicationHistory', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToMedicationHistory(ActiveReminderStruct value) {
+    medicationHistory.add(value);
+    prefs.setStringList('ff_medicationHistory',
+        _medicationHistory.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromMedicationHistory(ActiveReminderStruct value) {
+    medicationHistory.remove(value);
+    prefs.setStringList('ff_medicationHistory',
+        _medicationHistory.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromMedicationHistory(int index) {
+    medicationHistory.removeAt(index);
+    prefs.setStringList('ff_medicationHistory',
+        _medicationHistory.map((x) => x.serialize()).toList());
+  }
+
+  void updateMedicationHistoryAtIndex(
+    int index,
+    ActiveReminderStruct Function(ActiveReminderStruct) updateFn,
+  ) {
+    medicationHistory[index] = updateFn(_medicationHistory[index]);
+    prefs.setStringList('ff_medicationHistory',
+        _medicationHistory.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInMedicationHistory(int index, ActiveReminderStruct value) {
+    medicationHistory.insert(index, value);
+    prefs.setStringList('ff_medicationHistory',
+        _medicationHistory.map((x) => x.serialize()).toList());
   }
 }
 

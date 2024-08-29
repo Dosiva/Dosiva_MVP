@@ -3,6 +3,7 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
@@ -45,9 +46,13 @@ Future scheduleLocalReminders(
   int id = 0;
   List<ActiveReminderStruct>? activeReminders;
 
+  String urlLandingPage = 'dosiva://dosiva.se/land/';
+  String nfcTag = '';
+
 // Schedule everyday reminders
   if (activeMedications[0].reminderActive == true) {
     for (int j = 0; j < activeMedications.length; j++) {
+      nfcTag = urlLandingPage + activeMedications[j].medId;
       if (activeMedications[j].reminderFrequency == 1) {
         for (int i = 0; i < activeMedications[j].medicationTimesPerDay; i++) {
           await AwesomeNotifications().createNotification(
@@ -68,7 +73,7 @@ Future scheduleLocalReminders(
               medLabel: activeMedications[j].label,
               notificationId: id,
               scheduledTime: activeMedications[j].reminderTimes[i],
-              nfcTag: activeMedications[j].nfcTag));
+              nfcTag: nfcTag));
 
           id = id + 1;
         }

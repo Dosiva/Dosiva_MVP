@@ -1,7 +1,11 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'n_f_c_scan_landing_page_model.dart';
 export 'n_f_c_scan_landing_page_model.dart';
 
@@ -27,6 +31,9 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NFCScanLandingPageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {});
   }
 
   @override
@@ -38,6 +45,8 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -57,7 +66,7 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pop();
+              Navigator.pop(context);
             },
           ),
           actions: const [],
@@ -76,7 +85,7 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                       const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                   child: Container(
                     width: 0.0,
-                    height: 165.0,
+                    height: 143.0,
                     constraints: const BoxConstraints(
                       minWidth: double.infinity,
                     ),
@@ -103,7 +112,7 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 24.0),
                             child: Text(
-                              'Skanning lyckad!',
+                              'Medicin registrerad!',
                               style: FlutterFlowTheme.of(context)
                                   .headlineSmall
                                   .override(
@@ -129,9 +138,78 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                               ),
                             ),
                           ),
+                          Text(
+                            FFAppState()
+                                .activeMedications[functions.getMedicationIndex(
+                                    FFAppState().activeMedications.toList(),
+                                    widget.nfctag)!]
+                                .label,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
                         ],
                       ),
                     ),
+                  ),
+                ),
+              ),
+              Flexible(
+                child: Align(
+                  alignment: const AlignmentDirectional(0.0, -1.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Align(
+                        alignment: const AlignmentDirectional(0.0, 1.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 16.0, 0.0, 0.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed(
+                                'Home',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType:
+                                        PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 400),
+                                  ),
+                                },
+                              );
+                            },
+                            text: 'Hem',
+                            options: FFButtonOptions(
+                              width: MediaQuery.sizeOf(context).width * 0.6,
+                              height: 40.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(24.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
