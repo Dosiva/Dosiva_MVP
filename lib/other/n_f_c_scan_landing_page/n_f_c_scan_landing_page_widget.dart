@@ -11,10 +11,10 @@ export 'n_f_c_scan_landing_page_model.dart';
 class NFCScanLandingPageWidget extends StatefulWidget {
   const NFCScanLandingPageWidget({
     super.key,
-    String? nfctag,
-  }) : nfctag = nfctag ?? 'Ej funnen';
+    String? medid,
+  }) : medid = medid ?? 'Ej funnen';
 
-  final String nfctag;
+  final String medid;
 
   @override
   State<NFCScanLandingPageWidget> createState() =>
@@ -115,14 +115,20 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                             ),
                           ),
                           Text(
-                            FFAppState()
-                                .userRegisteredMedicine[
-                                    functions.getMedicationIndex(
-                                        FFAppState()
-                                            .userRegisteredMedicine
-                                            .toList(),
-                                        widget.nfctag)!]
-                                .label,
+                            valueOrDefault<String>(
+                              FFAppState()
+                                  .userRegisteredMedicine[
+                                      functions.getMedicationIndex(
+                                          FFAppState()
+                                              .userRegisteredMedicine
+                                              .toList(),
+                                          valueOrDefault<String>(
+                                            widget.medid,
+                                            'test',
+                                          ))!]
+                                  .label,
+                              'test',
+                            ),
                             style:
                                 FlutterFlowTheme.of(context).bodyLarge.override(
                                       fontFamily: 'Inter',
