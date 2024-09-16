@@ -2,19 +2,17 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'n_f_c_scan_landing_page_model.dart';
 export 'n_f_c_scan_landing_page_model.dart';
 
 class NFCScanLandingPageWidget extends StatefulWidget {
   const NFCScanLandingPageWidget({
     super.key,
-    String? medid,
-  }) : medid = medid ?? 'Ej funnen';
+    this.medid,
+  });
 
-  final String medid;
+  final String? medid;
 
   @override
   State<NFCScanLandingPageWidget> createState() =>
@@ -41,8 +39,6 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -116,17 +112,7 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                           ),
                           Text(
                             valueOrDefault<String>(
-                              FFAppState()
-                                  .userRegisteredMedicine[
-                                      functions.getMedicationIndex(
-                                          FFAppState()
-                                              .userRegisteredMedicine
-                                              .toList(),
-                                          valueOrDefault<String>(
-                                            widget.medid,
-                                            'test',
-                                          ))!]
-                                  .label,
+                              widget.medid,
                               'test',
                             ),
                             style:
