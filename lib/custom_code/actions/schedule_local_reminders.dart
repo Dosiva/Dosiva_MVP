@@ -16,7 +16,7 @@ import 'dart:math';
 //Custom code end
 
 Future scheduleLocalReminders(
-    List<UserRegisteredMedicationStruct>? activeMedications) async {
+    List<UserRegisteredMedicationStruct> activeMedications) async {
   AwesomeNotifications().initialize(
     null,
     [
@@ -76,8 +76,7 @@ Future scheduleLocalReminders(
                   timeZone: localTimeZone,
                   preciseAlarm: true,
                   repeats: false));
-          DateTime reminderTime = activeMedications[j].reminderStartDate;
-
+// change tracker
           FFAppState().scheduledReminders.add(ActiveReminderStruct(
               medLabel: activeMedications[j].label,
               notificationId: id,
