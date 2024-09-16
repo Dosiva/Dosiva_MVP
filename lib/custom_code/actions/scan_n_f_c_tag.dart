@@ -33,6 +33,7 @@ Future<void> scanNFCTag() async {
   } catch (e) {
     print('Error scanning NFC tag: $e');
   }
+  await FlutterNfcKit.finish(iosAlertMessage: "Finished!");
 }
 
 void updateNfcTagInAppState(FFAppState appState, NFCTag? tag) {
