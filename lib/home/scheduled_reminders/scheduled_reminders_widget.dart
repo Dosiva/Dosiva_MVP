@@ -206,7 +206,7 @@ class _ScheduledRemindersWidgetState extends State<ScheduledRemindersWidget> {
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 2.0, 0.0, 0.0),
                                           child: Text(
-                                            'NFC tag: ${scheduledRemindersItem.nfcTag}',
+                                            'MedId: ${scheduledRemindersItem.nfcTag}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(

@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_count_controller.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,7 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'medication_type_model.dart';
 export 'medication_type_model.dart';
@@ -27,6 +26,18 @@ class _MedicationTypeWidgetState extends State<MedicationTypeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MedicationTypeModel());
+
+    _model.textController1 ??= TextEditingController(
+        text: FFAppState()
+            .currentMedicineRegistration
+            .medicationDosage
+            .toString());
+    _model.textFieldFocusNode1 ??= FocusNode();
+
+    _model.textController2 ??= TextEditingController(
+        text:
+            FFAppState().currentMedicineRegistration.remainingDoses.toString());
+    _model.textFieldFocusNode2 ??= FocusNode();
   }
 
   @override
@@ -93,7 +104,7 @@ class _MedicationTypeWidgetState extends State<MedicationTypeWidget> {
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Text(
-                    FFAppState().currentMedicationRegistration.label,
+                    FFAppState().currentMedicineRegistration.label,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           letterSpacing: 0.0,
@@ -109,7 +120,7 @@ class _MedicationTypeWidgetState extends State<MedicationTypeWidget> {
                     ),
                     options: const ['piller', 'g', 'mg'],
                     onChanged: (val) =>
-                        setState(() => _model.dropDownValue = val),
+                        safeSetState(() => _model.dropDownValue = val),
                     width: 300.0,
                     height: 56.0,
                     textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -150,68 +161,115 @@ class _MedicationTypeWidgetState extends State<MedicationTypeWidget> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                      child: Container(
-                        width: 160.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: SizedBox(
+                          width: 200.0,
+                          child: TextFormField(
+                            controller: _model.textController1,
+                            focusNode: _model.textFieldFocusNode1,
+                            autofocus: false,
+                            textCapitalization: TextCapitalization.none,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintText: 'TextField',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                            maxLength: 6,
+                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                            buildCounter: (context,
+                                    {required currentLength,
+                                    required isFocused,
+                                    maxLength}) =>
+                                null,
+                            keyboardType: TextInputType.number,
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            validator: _model.textController1Validator
+                                .asValidator(context),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                            ],
                           ),
                         ),
-                        child: FlutterFlowCountController(
-                          decrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          incrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          countBuilder: (count) => Text(
-                            count.toString(),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              _model.dropDownValue,
+                              'piller',
+                            ),
                             style: FlutterFlowTheme.of(context)
-                                .titleLarge
+                                .bodyMedium
                                 .override(
-                                  fontFamily: 'Sora',
+                                  fontFamily: 'Inter',
                                   letterSpacing: 0.0,
                                 ),
                           ),
-                          count: _model.countControllerValue1 ??= 1,
-                          updateCount: (count) => setState(
-                              () => _model.countControllerValue1 = count),
-                          stepSize: 1,
-                          minimum: 1,
-                          maximum: 10,
                         ),
                       ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                      Flexible(
+                        flex: 1,
                         child: Text(
-                          valueOrDefault<String>(
-                            _model.dropDownValue,
-                            'piller',
-                          ),
+                          ' per tillfälle',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
@@ -219,15 +277,8 @@ class _MedicationTypeWidgetState extends State<MedicationTypeWidget> {
                                   ),
                         ),
                       ),
-                    ),
-                    Text(
-                      ' per tillfälle',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            letterSpacing: 0.0,
-                          ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
@@ -266,76 +317,113 @@ class _MedicationTypeWidgetState extends State<MedicationTypeWidget> {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                      child: Container(
-                        width: 160.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                        ),
-                        child: FlutterFlowCountController(
-                          decrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.minus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          incrementIconBuilder: (enabled) => FaIcon(
-                            FontAwesomeIcons.plus,
-                            color: enabled
-                                ? FlutterFlowTheme.of(context).secondaryText
-                                : FlutterFlowTheme.of(context).alternate,
-                            size: 20.0,
-                          ),
-                          countBuilder: (count) => Text(
-                            count.toString(),
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
-                                  fontFamily: 'Sora',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                          count: _model.countControllerValue2 ??= 1,
-                          updateCount: (count) => setState(
-                              () => _model.countControllerValue2 = count),
-                          stepSize: 1,
-                          minimum: 1,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          valueOrDefault<String>(
-                            _model.dropDownValue,
-                            'piller',
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: SizedBox(
+                          width: 200.0,
+                          child: TextFormField(
+                            controller: _model.textController2,
+                            focusNode: _model.textFieldFocusNode2,
+                            autofocus: false,
+                            textCapitalization: TextCapitalization.none,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
+                              hintText: 'TextField',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                            maxLength: 6,
+                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                            buildCounter: (context,
+                                    {required currentLength,
+                                    required isFocused,
+                                    maxLength}) =>
+                                null,
+                            keyboardType: TextInputType.number,
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            validator: _model.textController2Validator
+                                .asValidator(context),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              _model.dropDownValue,
+                              'piller',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Flexible(
                   child: Align(
@@ -347,14 +435,15 @@ class _MedicationTypeWidgetState extends State<MedicationTypeWidget> {
                         FFButtonWidget(
                           onPressed: () async {
                             FFAppState()
-                                .updateCurrentMedicationRegistrationStruct(
+                                .updateCurrentMedicineRegistrationStruct(
                               (e) => e
                                 ..type = _model.dropDownValue
-                                ..remainingDoses = _model.countControllerValue2
+                                ..remainingDoses =
+                                    int.tryParse(_model.textController2.text)
                                 ..medicationDosage =
-                                    _model.countControllerValue1,
+                                    int.tryParse(_model.textController1.text),
                             );
-                            setState(() {});
+                            safeSetState(() {});
 
                             context.pushNamed('RegisterNFCTag');
                           },

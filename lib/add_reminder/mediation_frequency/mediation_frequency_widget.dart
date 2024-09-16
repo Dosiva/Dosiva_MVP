@@ -149,7 +149,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Text(
-                    FFAppState().currentMedicationRegistration.label,
+                    FFAppState().currentMedicineRegistration.label,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           letterSpacing: 0.0,
@@ -164,10 +164,10 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      FFAppState().updateCurrentMedicationRegistrationStruct(
+                      FFAppState().updateCurrentMedicineRegistrationStruct(
                         (e) => e..reminderFrequency = 1,
                       );
-                      setState(() {});
+                      safeSetState(() {});
                     },
                     child: Container(
                       width: double.infinity,
@@ -209,19 +209,19 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                               FormFieldController<String>(
                                         _model.dropDownValue1 ??= () {
                                           if (FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .medicationTimesPerDay ==
                                               1) {
                                             return FFAppConstants
                                                 .timesPerDayChoices[0];
                                           } else if (FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .medicationTimesPerDay ==
                                               2) {
                                             return FFAppConstants
                                                 .timesPerDayChoices[1];
                                           } else if (FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .medicationTimesPerDay ==
                                               3) {
                                             return FFAppConstants
@@ -233,7 +233,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                       ),
                                       options:
                                           FFAppConstants.timesPerDayChoices,
-                                      onChanged: (val) => setState(
+                                      onChanged: (val) => safeSetState(
                                           () => _model.dropDownValue1 = val),
                                       width: 75.0,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -259,7 +259,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                       margin: const EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 0.0),
                                       hidesUnderline: true,
-                                      isOverButton: true,
+                                      isOverButton: false,
                                       isSearchable: false,
                                       isMultiSelect: false,
                                     ),
@@ -305,7 +305,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                 ],
                               ),
                               if (FFAppState()
-                                      .currentMedicationRegistration
+                                      .currentMedicineRegistration
                                       .reminderFrequency ==
                                   1)
                                 Flexible(
@@ -320,7 +320,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                   ),
                                 ),
                               if (FFAppState()
-                                      .currentMedicationRegistration
+                                      .currentMedicineRegistration
                                       .reminderFrequency !=
                                   1)
                                 Icon(
@@ -344,10 +344,10 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      FFAppState().updateCurrentMedicationRegistrationStruct(
+                      FFAppState().updateCurrentMedicineRegistrationStruct(
                         (e) => e..reminderFrequency = 2,
                       );
-                      setState(() {});
+                      safeSetState(() {});
                     },
                     child: Container(
                       width: double.infinity,
@@ -404,7 +404,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                       ),
                                       options:
                                           FFAppConstants.dayIntervalChoices,
-                                      onChanged: (val) => setState(
+                                      onChanged: (val) => safeSetState(
                                           () => _model.dropDownValue2 = val),
                                       width: 97.0,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -430,7 +430,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                       margin: const EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 0.0),
                                       hidesUnderline: true,
-                                      isOverButton: true,
+                                      isOverButton: false,
                                       isSearchable: false,
                                       isMultiSelect: false,
                                     ),
@@ -450,7 +450,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                 ],
                               ),
                               if (FFAppState()
-                                      .currentMedicationRegistration
+                                      .currentMedicineRegistration
                                       .reminderFrequency ==
                                   2)
                                 Icon(
@@ -459,7 +459,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                   size: 24.0,
                                 ),
                               if (FFAppState()
-                                      .currentMedicationRegistration
+                                      .currentMedicineRegistration
                                       .reminderFrequency !=
                                   2)
                                 Icon(
@@ -483,10 +483,10 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      FFAppState().updateCurrentMedicationRegistrationStruct(
+                      FFAppState().updateCurrentMedicineRegistrationStruct(
                         (e) => e..reminderFrequency = 3,
                       );
-                      setState(() {});
+                      safeSetState(() {});
                     },
                     child: Container(
                       width: double.infinity,
@@ -528,7 +528,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                         ),
                                   ),
                                   if (FFAppState()
-                                          .currentMedicationRegistration
+                                          .currentMedicineRegistration
                                           .reminderFrequency ==
                                       3)
                                     Icon(
@@ -538,7 +538,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                       size: 24.0,
                                     ),
                                   if (FFAppState()
-                                          .currentMedicationRegistration
+                                          .currentMedicineRegistration
                                           .reminderFrequency !=
                                       3)
                                     Icon(
@@ -551,7 +551,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                               ),
                             ),
                             if (FFAppState()
-                                    .currentMedicationRegistration
+                                    .currentMedicineRegistration
                                     .reminderFrequency ==
                                 3)
                               Padding(
@@ -565,17 +565,17 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                     FFButtonWidget(
                                       onPressed: () async {
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..updateMedicationWeekdays(
                                               (e) => e[0] = FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .medicationWeekdays
                                                       .first ==
                                                   false,
                                             ),
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: 'M',
                                       options: FFButtonOptions(
@@ -591,7 +591,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                             const EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FFAppState()
-                                                .currentMedicationRegistration
+                                                .currentMedicineRegistration
                                                 .medicationWeekdays[0]
                                             ? FlutterFlowTheme.of(context)
                                                 .primary
@@ -615,16 +615,16 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                     FFButtonWidget(
                                       onPressed: () async {
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..updateMedicationWeekdays(
                                               (e) => e[1] = FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .medicationWeekdays[1] ==
                                                   false,
                                             ),
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: 'T',
                                       options: FFButtonOptions(
@@ -641,7 +641,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: valueOrDefault<Color>(
                                           FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .medicationWeekdays[1]
                                               ? FlutterFlowTheme.of(context)
                                                   .primary
@@ -668,16 +668,16 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                     FFButtonWidget(
                                       onPressed: () async {
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..updateMedicationWeekdays(
                                               (e) => e[2] = FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .medicationWeekdays[2] ==
                                                   false,
                                             ),
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: 'O',
                                       options: FFButtonOptions(
@@ -694,7 +694,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: valueOrDefault<Color>(
                                           FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .medicationWeekdays[2]
                                               ? FlutterFlowTheme.of(context)
                                                   .primary
@@ -721,16 +721,16 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                     FFButtonWidget(
                                       onPressed: () async {
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..updateMedicationWeekdays(
                                               (e) => e[3] = FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .medicationWeekdays[3] ==
                                                   false,
                                             ),
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: 'T',
                                       options: FFButtonOptions(
@@ -746,7 +746,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                             const EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FFAppState()
-                                                .currentMedicationRegistration
+                                                .currentMedicineRegistration
                                                 .medicationWeekdays[3]
                                             ? FlutterFlowTheme.of(context)
                                                 .primary
@@ -770,16 +770,16 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                     FFButtonWidget(
                                       onPressed: () async {
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..updateMedicationWeekdays(
                                               (e) => e[4] = FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .medicationWeekdays[4] ==
                                                   false,
                                             ),
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: 'F',
                                       options: FFButtonOptions(
@@ -796,7 +796,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: valueOrDefault<Color>(
                                           FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .medicationWeekdays[4]
                                               ? FlutterFlowTheme.of(context)
                                                   .primary
@@ -823,16 +823,16 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                     FFButtonWidget(
                                       onPressed: () async {
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..updateMedicationWeekdays(
                                               (e) => e[5] = FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .medicationWeekdays[5] ==
                                                   false,
                                             ),
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: 'L',
                                       options: FFButtonOptions(
@@ -849,7 +849,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: valueOrDefault<Color>(
                                           FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .medicationWeekdays[5]
                                               ? FlutterFlowTheme.of(context)
                                                   .primary
@@ -876,16 +876,16 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                     FFButtonWidget(
                                       onPressed: () async {
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..updateMedicationWeekdays(
                                               (e) => e[6] = FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .medicationWeekdays[6] ==
                                                   false,
                                             ),
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: 'S',
                                       options: FFButtonOptions(
@@ -902,7 +902,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: valueOrDefault<Color>(
                                           FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .medicationWeekdays[6]
                                               ? FlutterFlowTheme.of(context)
                                                   .primary
@@ -944,10 +944,10 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      FFAppState().updateCurrentMedicationRegistrationStruct(
+                      FFAppState().updateCurrentMedicineRegistrationStruct(
                         (e) => e..reminderFrequency = 4,
                       );
-                      setState(() {});
+                      safeSetState(() {});
                     },
                     child: Container(
                       width: double.infinity,
@@ -985,7 +985,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                     ),
                               ),
                               if (FFAppState()
-                                      .currentMedicationRegistration
+                                      .currentMedicineRegistration
                                       .reminderFrequency ==
                                   4)
                                 Icon(
@@ -994,7 +994,7 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                   size: 24.0,
                                 ),
                               if (FFAppState()
-                                      .currentMedicationRegistration
+                                      .currentMedicineRegistration
                                       .reminderFrequency !=
                                   4)
                                 Icon(
@@ -1023,10 +1023,10 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                           child: FFButtonWidget(
                             onPressed: () async {
                               FFAppState()
-                                  .updateCurrentMedicationRegistrationStruct(
+                                  .updateCurrentMedicineRegistrationStruct(
                                 (e) => e
                                   ..reminderFrequency = FFAppState()
-                                      .currentMedicationRegistration
+                                      .currentMedicineRegistration
                                       .reminderFrequency
                                   ..medicationTimesPerDay = valueOrDefault<int>(
                                     () {
@@ -1047,10 +1047,42 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                                       }
                                     }(),
                                     0,
+                                  )
+                                  ..medicationDayInterval = valueOrDefault<int>(
+                                    () {
+                                      if (_model.dropDownValue2 ==
+                                          FFAppConstants
+                                              .dayIntervalChoices[0]) {
+                                        return 2;
+                                      } else if (_model.dropDownValue2 ==
+                                          FFAppConstants
+                                              .dayIntervalChoices[1]) {
+                                        return 3;
+                                      } else if (_model.dropDownValue2 ==
+                                          FFAppConstants
+                                              .dayIntervalChoices[2]) {
+                                        return 4;
+                                      } else if (_model.dropDownValue2 ==
+                                          FFAppConstants
+                                              .dayIntervalChoices[3]) {
+                                        return 5;
+                                      } else if (_model.dropDownValue2 ==
+                                          FFAppConstants
+                                              .dayIntervalChoices[4]) {
+                                        return 6;
+                                      } else if (_model.dropDownValue2 ==
+                                          FFAppConstants
+                                              .dayIntervalChoices[5]) {
+                                        return 7;
+                                      } else {
+                                        return 0;
+                                      }
+                                    }(),
+                                    0,
                                   ),
                               );
                               if (FFAppState()
-                                      .currentMedicationRegistration
+                                      .currentMedicineRegistration
                                       .reminderFrequency ==
                                   4) {
                                 context.pushNamed(
@@ -1085,15 +1117,15 @@ class _MediationFrequencyWidgetState extends State<MediationFrequencyWidget>
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: (FFAppState()
-                                              .currentMedicationRegistration
+                                              .currentMedicineRegistration
                                               .reminderFrequency <
                                           1) ||
                                       ((FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .reminderFrequency ==
                                               3) &&
                                           !FFAppState()
-                                              .currentMedicationRegistration
+                                              .currentMedicineRegistration
                                               .medicationWeekdays
                                               .contains(true))
                                   ? FlutterFlowTheme.of(context).alternate

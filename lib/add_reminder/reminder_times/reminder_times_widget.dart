@@ -92,7 +92,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: Text(
-                      FFAppState().currentMedicationRegistration.label,
+                      FFAppState().currentMedicineRegistration.label,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
                             letterSpacing: 0.0,
@@ -191,7 +191,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                                   CupertinoDatePickerMode.time,
                                               minimumDate: DateTime(1900),
                                               initialDateTime: FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .reminderTimes[0],
                                               maximumDate: DateTime(2050),
                                               backgroundColor:
@@ -209,13 +209,13 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                         );
                                       });
                                   FFAppState()
-                                      .updateCurrentMedicationRegistrationStruct(
+                                      .updateCurrentMedicineRegistrationStruct(
                                     (e) => e
                                       ..updateReminderTimes(
                                         (e) => e[0] = _model.datePicked1!,
                                       ),
                                   );
-                                  setState(() {});
+                                  safeSetState(() {});
                                 },
                                 child: Container(
                                   width: 100.0,
@@ -231,7 +231,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                       dateTimeFormat(
                                           "Hm",
                                           FFAppState()
-                                              .currentMedicationRegistration
+                                              .currentMedicineRegistration
                                               .reminderTimes[0]),
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall
@@ -251,11 +251,11 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                   ),
                 ),
                 if ((FFAppState()
-                            .currentMedicationRegistration
+                            .currentMedicineRegistration
                             .medicationTimesPerDay >
                         1) &&
                     (FFAppState()
-                            .currentMedicationRegistration
+                            .currentMedicineRegistration
                             .reminderFrequency ==
                         1))
                   Padding(
@@ -351,7 +351,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                                     .time,
                                                 minimumDate: DateTime(1900),
                                                 initialDateTime: FFAppState()
-                                                    .currentMedicationRegistration
+                                                    .currentMedicineRegistration
                                                     .reminderTimes[1],
                                                 maximumDate: DateTime(2050),
                                                 backgroundColor:
@@ -369,13 +369,13 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                           );
                                         });
                                     FFAppState()
-                                        .updateCurrentMedicationRegistrationStruct(
+                                        .updateCurrentMedicineRegistrationStruct(
                                       (e) => e
                                         ..updateReminderTimes(
                                           (e) => e[1] = _model.datePicked2!,
                                         ),
                                     );
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     width: 100.0,
@@ -391,7 +391,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                         dateTimeFormat(
                                             "Hm",
                                             FFAppState()
-                                                .currentMedicationRegistration
+                                                .currentMedicineRegistration
                                                 .reminderTimes[1]),
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall
@@ -411,11 +411,11 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                     ),
                   ),
                 if ((FFAppState()
-                            .currentMedicationRegistration
+                            .currentMedicineRegistration
                             .medicationTimesPerDay ==
                         3) &&
                     (FFAppState()
-                            .currentMedicationRegistration
+                            .currentMedicineRegistration
                             .reminderFrequency ==
                         1))
                   Padding(
@@ -511,7 +511,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                                     .time,
                                                 minimumDate: DateTime(1900),
                                                 initialDateTime: FFAppState()
-                                                    .currentMedicationRegistration
+                                                    .currentMedicineRegistration
                                                     .reminderTimes[2],
                                                 maximumDate: DateTime(2050),
                                                 backgroundColor:
@@ -529,13 +529,13 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                           );
                                         });
                                     FFAppState()
-                                        .updateCurrentMedicationRegistrationStruct(
+                                        .updateCurrentMedicineRegistrationStruct(
                                       (e) => e
                                         ..updateReminderTimes(
                                           (e) => e[2] = _model.datePicked3!,
                                         ),
                                     );
-                                    setState(() {});
+                                    safeSetState(() {});
                                   },
                                   child: Container(
                                     width: 100.0,
@@ -551,7 +551,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                         dateTimeFormat(
                                             "Hm",
                                             FFAppState()
-                                                .currentMedicationRegistration
+                                                .currentMedicineRegistration
                                                 .reminderTimes[2]),
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall
@@ -580,7 +580,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                     onTap: () async {
                       _model.specificIntervalEnabled =
                           !_model.specificIntervalEnabled;
-                      setState(() {});
+                      safeSetState(() {});
                     },
                     child: Container(
                       width: double.infinity,
@@ -633,10 +633,10 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       if (FFAppState()
-                                              .currentMedicationRegistration
+                                              .currentMedicineRegistration
                                               .startDateEnabled ||
                                           FFAppState()
-                                              .currentMedicationRegistration
+                                              .currentMedicineRegistration
                                               .endDateEnabled)
                                         Align(
                                           alignment:
@@ -658,7 +658,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                               ),
                                               onPressed: () async {
                                                 FFAppState()
-                                                    .updateCurrentMedicationRegistrationStruct(
+                                                    .updateCurrentMedicineRegistrationStruct(
                                                   (e) => e
                                                     ..startDateEnabled = false
                                                     ..endDateEnabled = false
@@ -666,7 +666,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                                         getCurrentTimestamp
                                                     ..reminderEndDate = null,
                                                 );
-                                                setState(() {});
+                                                safeSetState(() {});
                                               },
                                             ),
                                           ),
@@ -717,7 +717,7 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                             await showDatePicker(
                                           context: context,
                                           initialDate: (FFAppState()
-                                                  .currentMedicationRegistration
+                                                  .currentMedicineRegistration
                                                   .reminderStartDate ??
                                               DateTime.now()),
                                           firstDate: DateTime(1900),
@@ -772,13 +772,13 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                           });
                                         }
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..startDateEnabled = true
                                             ..reminderStartDate =
                                                 _model.datePicked4,
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Container(
                                         height: 50.0,
@@ -797,12 +797,12 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                                     16.0, 0.0, 16.0, 0.0),
                                             child: Text(
                                               FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .startDateEnabled
                                                   ? dateTimeFormat(
                                                       "yMMMd",
                                                       FFAppState()
-                                                          .currentMedicationRegistration
+                                                          .currentMedicineRegistration
                                                           .reminderStartDate!)
                                                   : 'Idag',
                                               style:
@@ -888,13 +888,13 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                           });
                                         }
                                         FFAppState()
-                                            .updateCurrentMedicationRegistrationStruct(
+                                            .updateCurrentMedicineRegistrationStruct(
                                           (e) => e
                                             ..endDateEnabled = true
                                             ..reminderEndDate =
                                                 _model.datePicked5,
                                         );
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       child: Container(
                                         height: 50.0,
@@ -913,12 +913,12 @@ class _ReminderTimesWidgetState extends State<ReminderTimesWidget> {
                                                     16.0, 0.0, 16.0, 0.0),
                                             child: Text(
                                               FFAppState()
-                                                      .currentMedicationRegistration
+                                                      .currentMedicineRegistration
                                                       .endDateEnabled
                                                   ? dateTimeFormat(
                                                       "yMMMd",
                                                       FFAppState()
-                                                          .currentMedicationRegistration
+                                                          .currentMedicineRegistration
                                                           .reminderEndDate!)
                                                   : 'kontinuerligt',
                                               style:

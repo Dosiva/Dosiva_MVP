@@ -93,7 +93,7 @@ class _MedicationOverviewWidgetState extends State<MedicationOverviewWidget> {
               Builder(
                 builder: (context) {
                   final activeMedications =
-                      FFAppState().activeMedications.toList();
+                      FFAppState().userRegisteredMedicine.toList();
 
                   return ListView.builder(
                     padding: EdgeInsets.zero,
@@ -257,9 +257,9 @@ class _MedicationOverviewWidgetState extends State<MedicationOverviewWidget> {
                                       ),
                                       onPressed: () async {
                                         FFAppState()
-                                            .removeFromActiveMedications(
+                                            .removeFromUserRegisteredMedicine(
                                                 activeMedicationsItem);
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                     ),
                                   ),
@@ -277,7 +277,7 @@ class _MedicationOverviewWidgetState extends State<MedicationOverviewWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    FFAppState().currentMedicationRegistration =
+                    FFAppState().currentMedicineRegistration =
                         UserRegisteredMedicationStruct(
                       label: 'Min Medicin',
                       type: 'piller',
@@ -295,7 +295,6 @@ class _MedicationOverviewWidgetState extends State<MedicationOverviewWidget> {
                       ],
                       reminderMessage: 'hej',
                       reminderActive: true,
-                      medicationDayInterval: 'annan',
                       medicationDosage: 1,
                       reminderStartDate: getCurrentTimestamp,
                       reminderEndDate: getCurrentTimestamp,
@@ -308,12 +307,13 @@ class _MedicationOverviewWidgetState extends State<MedicationOverviewWidget> {
                       ],
                       medicationTimesPerDay: 1,
                       medId: functions.generateMedId(
-                          FFAppState().activeMedications.toList()),
+                          FFAppState().userRegisteredMedicine.toList()),
+                      medicationDayInterval: 2,
                     );
                     FFAppState().currentActiveMedicationIndex = 0;
                     FFAppState().currentMedicationIndexSet = false;
                     FFAppState().scannedNFCTag = '';
-                    setState(() {});
+                    safeSetState(() {});
 
                     context.pushNamed('Label');
                   },
