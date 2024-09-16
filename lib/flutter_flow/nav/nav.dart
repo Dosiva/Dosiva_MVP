@@ -38,100 +38,104 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: '_initialize',
           path: '/',
           builder: (context, _) => const NavBarPage(),
-        ),
-        FFRoute(
-          name: 'Label',
-          path: '/label',
-          builder: (context, params) => const LabelWidget(),
-        ),
-        FFRoute(
-          name: 'MedicationType',
-          path: '/medicationType',
-          builder: (context, params) => const MedicationTypeWidget(),
-        ),
-        FFRoute(
-          name: 'MediationFrequency',
-          path: '/mediationFrequency',
-          builder: (context, params) => const MediationFrequencyWidget(),
-        ),
-        FFRoute(
-          name: 'FirstPage',
-          path: '/firstPage',
-          builder: (context, params) => const FirstPageWidget(),
-        ),
-        FFRoute(
-          name: 'SecondPage',
-          path: '/secondPage',
-          builder: (context, params) => const SecondPageWidget(),
-        ),
-        FFRoute(
-          name: 'Home',
-          path: '/home',
-          builder: (context, params) =>
-              params.isEmpty ? const NavBarPage(initialPage: 'Home') : const HomeWidget(),
-        ),
-        FFRoute(
-          name: 'ReminderTimes',
-          path: '/reminderTimes',
-          builder: (context, params) => const ReminderTimesWidget(),
-        ),
-        FFRoute(
-          name: 'Profile',
-          path: '/profile',
-          builder: (context, params) => const ProfileWidget(),
-        ),
-        FFRoute(
-          name: 'Statistics',
-          path: '/statistics',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Statistics')
-              : const StatisticsWidget(),
-        ),
-        FFRoute(
-          name: 'MedicationOverview',
-          path: '/medicationOverview',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'MedicationOverview')
-              : const MedicationOverviewWidget(),
-        ),
-        FFRoute(
-          name: 'RegisterNFCTag',
-          path: '/registerNFCTag',
-          builder: (context, params) => const RegisterNFCTagWidget(),
-        ),
-        FFRoute(
-          name: 'MedicationDetails',
-          path: '/medicationDetails',
-          builder: (context, params) => MedicationDetailsWidget(
-            medicationInformation: params.getParam(
-              'medicationInformation',
-              ParamType.DataStruct,
-              isList: false,
-              structBuilder: UserRegisteredMedicationStruct.fromSerializableMap,
+          routes: [
+            FFRoute(
+              name: 'Label',
+              path: 'label',
+              builder: (context, params) => const LabelWidget(),
             ),
-            index: params.getParam(
-              'index',
-              ParamType.int,
+            FFRoute(
+              name: 'MedicationType',
+              path: 'medicationType',
+              builder: (context, params) => const MedicationTypeWidget(),
             ),
-          ),
-        ),
-        FFRoute(
-          name: 'ScheduledReminders',
-          path: '/scheduledReminders',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'ScheduledReminders')
-              : const ScheduledRemindersWidget(),
-        ),
-        FFRoute(
-          name: 'NFCScanLandingPage',
-          path: '/land/:nfctag',
-          builder: (context, params) => NFCScanLandingPageWidget(
-            nfctag: params.getParam(
-              'nfctag',
-              ParamType.String,
+            FFRoute(
+              name: 'MediationFrequency',
+              path: 'mediationFrequency',
+              builder: (context, params) => const MediationFrequencyWidget(),
             ),
-          ),
-        )
+            FFRoute(
+              name: 'FirstPage',
+              path: 'firstPage',
+              builder: (context, params) => const FirstPageWidget(),
+            ),
+            FFRoute(
+              name: 'SecondPage',
+              path: 'secondPage',
+              builder: (context, params) => const SecondPageWidget(),
+            ),
+            FFRoute(
+              name: 'Home',
+              path: 'home',
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'Home')
+                  : const HomeWidget(),
+            ),
+            FFRoute(
+              name: 'ReminderTimes',
+              path: 'reminderTimes',
+              builder: (context, params) => const ReminderTimesWidget(),
+            ),
+            FFRoute(
+              name: 'Profile',
+              path: 'profile',
+              builder: (context, params) => const ProfileWidget(),
+            ),
+            FFRoute(
+              name: 'Statistics',
+              path: 'statistics',
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'Statistics')
+                  : const StatisticsWidget(),
+            ),
+            FFRoute(
+              name: 'MedicationOverview',
+              path: 'medicationOverview',
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'MedicationOverview')
+                  : const MedicationOverviewWidget(),
+            ),
+            FFRoute(
+              name: 'RegisterNFCTag',
+              path: 'registerNFCTag',
+              builder: (context, params) => const RegisterNFCTagWidget(),
+            ),
+            FFRoute(
+              name: 'MedicationDetails',
+              path: 'medicationDetails',
+              builder: (context, params) => MedicationDetailsWidget(
+                medicationInformation: params.getParam(
+                  'medicationInformation',
+                  ParamType.DataStruct,
+                  isList: false,
+                  structBuilder:
+                      UserRegisteredMedicationStruct.fromSerializableMap,
+                ),
+                index: params.getParam(
+                  'index',
+                  ParamType.int,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: 'ScheduledReminders',
+              path: 'scheduledReminders',
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'ScheduledReminders')
+                  : const ScheduledRemindersWidget(),
+            ),
+            FFRoute(
+              name: 'NFCScanLandingPage',
+              path: 'land/:medid',
+              builder: (context, params) => NFCScanLandingPageWidget(
+                medid: params.getParam(
+                  'medid',
+                  ParamType.String,
+                ),
+              ),
+            )
+          ].map((r) => r.toRoute(appStateNotifier)).toList(),
+        ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
