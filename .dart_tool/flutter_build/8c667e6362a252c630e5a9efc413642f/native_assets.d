@@ -1,0 +1,1 @@
+ /Users/liepa/Dosiva_MVP-2/.dart_tool/flutter_build/8c667e6362a252c630e5a9efc413642f/native_assets.yaml: 
