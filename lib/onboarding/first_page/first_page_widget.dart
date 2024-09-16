@@ -91,7 +91,7 @@ class _FirstPageWidgetState extends State<FirstPageWidget> {
                               padding: const EdgeInsets.all(12.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  FFAppState().currentMedicationRegistration =
+                                  FFAppState().currentMedicineRegistration =
                                       UserRegisteredMedicationStruct(
                                     label: 'Min Medicin',
                                     type: 'piller',
@@ -109,7 +109,6 @@ class _FirstPageWidgetState extends State<FirstPageWidget> {
                                     ],
                                     reminderMessage: 'hej',
                                     reminderActive: true,
-                                    medicationDayInterval: 'annan',
                                     medicationDosage: 1,
                                     medicationTimesPerDay: 1,
                                     reminderStartDate: getCurrentTimestamp,
@@ -124,9 +123,10 @@ class _FirstPageWidgetState extends State<FirstPageWidget> {
                                           1724958000000)
                                     ],
                                     medId: 'not_generated',
+                                    medicationDayInterval: 2,
                                   );
                                   FFAppState().currentActiveMedicationIndex = 0;
-                                  setState(() {});
+                                  safeSetState(() {});
 
                                   context.pushNamed('Label');
                                 },

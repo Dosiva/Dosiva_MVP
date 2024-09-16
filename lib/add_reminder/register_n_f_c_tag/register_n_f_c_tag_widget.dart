@@ -31,19 +31,7 @@ class _RegisterNFCTagWidgetState extends State<RegisterNFCTagWidget>
     _model = createModel(context, () => RegisterNFCTagModel());
 
     animationsMap.addAll({
-      'containerOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          RotateEffect(
-            curve: Curves.easeIn,
-            delay: 0.0.ms,
-            duration: 400.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation2': AnimationInfo(
+      'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           ScaleEffect(
@@ -108,7 +96,7 @@ class _RegisterNFCTagWidgetState extends State<RegisterNFCTagWidget>
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
                     child: Text(
-                      'Skanna din NFC-tag',
+                      'Koppla din NFC-tag',
                       textAlign: TextAlign.start,
                       style:
                           FlutterFlowTheme.of(context).headlineSmall.override(
@@ -121,7 +109,7 @@ class _RegisterNFCTagWidgetState extends State<RegisterNFCTagWidget>
                 Align(
                   alignment: const AlignmentDirectional(-1.0, 0.0),
                   child: Text(
-                    FFAppState().currentMedicationRegistration.label,
+                    FFAppState().currentMedicineRegistration.label,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           letterSpacing: 0.0,
@@ -137,10 +125,10 @@ class _RegisterNFCTagWidgetState extends State<RegisterNFCTagWidget>
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       await actions.scanNFCTag();
-                      FFAppState().updateCurrentMedicationRegistrationStruct(
+                      FFAppState().updateCurrentMedicineRegistrationStruct(
                         (e) => e..nfcTag = FFAppState().scannedNFCTag,
                       );
-                      setState(() {});
+                      safeSetState(() {});
                     },
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * 0.5,
@@ -206,8 +194,7 @@ class _RegisterNFCTagWidgetState extends State<RegisterNFCTagWidget>
                         ),
                       ),
                     ),
-                  ).animateOnPageLoad(
-                      animationsMap['containerOnPageLoadAnimation1']!),
+                  ),
                 ),
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
@@ -236,18 +223,19 @@ class _RegisterNFCTagWidgetState extends State<RegisterNFCTagWidget>
                           child: FFButtonWidget(
                             onPressed: () async {
                               if (FFAppState().currentMedicationIndexSet) {
-                                FFAppState().updateActiveMedicationsAtIndex(
+                                FFAppState()
+                                    .updateUserRegisteredMedicineAtIndex(
                                   FFAppState().currentActiveMedicationIndex,
-                                  (_) => FFAppState()
-                                      .currentMedicationRegistration,
+                                  (_) =>
+                                      FFAppState().currentMedicineRegistration,
                                 );
                               } else {
-                                FFAppState().addToActiveMedications(
-                                    FFAppState().currentMedicationRegistration);
+                                FFAppState().addToUserRegisteredMedicine(
+                                    FFAppState().currentMedicineRegistration);
                               }
 
                               await actions.scheduleLocalReminders(
-                                FFAppState().activeMedications.toList(),
+                                FFAppState().userRegisteredMedicine.toList(),
                               );
 
                               context.pushNamed('Home');
@@ -298,8 +286,8 @@ class _RegisterNFCTagWidgetState extends State<RegisterNFCTagWidget>
                                 borderRadius: BorderRadius.circular(5.0),
                                 shape: BoxShape.rectangle,
                               ),
-                            ).animateOnPageLoad(animationsMap[
-                                'containerOnPageLoadAnimation2']!),
+                            ).animateOnPageLoad(
+                                animationsMap['containerOnPageLoadAnimation']!),
                           ),
                         ),
                       ],

@@ -15,7 +15,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
     List<bool>? medicationWeekdays,
     String? reminderMessage,
     bool? reminderActive,
-    String? medicationDayInterval,
     int? medicationTimesPerDay,
     int? medicationDosage,
     DateTime? reminderStartDate,
@@ -25,6 +24,7 @@ class UserRegisteredMedicationStruct extends BaseStruct {
     List<DateTime>? reminderTimes,
     String? nfcTag,
     String? medId,
+    int? medicationDayInterval,
   })  : _label = label,
         _type = type,
         _remainingDoses = remainingDoses,
@@ -33,7 +33,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         _medicationWeekdays = medicationWeekdays,
         _reminderMessage = reminderMessage,
         _reminderActive = reminderActive,
-        _medicationDayInterval = medicationDayInterval,
         _medicationTimesPerDay = medicationTimesPerDay,
         _medicationDosage = medicationDosage,
         _reminderStartDate = reminderStartDate,
@@ -42,7 +41,8 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         _endDateEnabled = endDateEnabled,
         _reminderTimes = reminderTimes,
         _nfcTag = nfcTag,
-        _medId = medId;
+        _medId = medId,
+        _medicationDayInterval = medicationDayInterval;
 
   // "label" field.
   String? _label;
@@ -112,13 +112,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
   set reminderActive(bool? val) => _reminderActive = val;
 
   bool hasReminderActive() => _reminderActive != null;
-
-  // "medication_day_interval" field.
-  String? _medicationDayInterval;
-  String get medicationDayInterval => _medicationDayInterval ?? '';
-  set medicationDayInterval(String? val) => _medicationDayInterval = val;
-
-  bool hasMedicationDayInterval() => _medicationDayInterval != null;
 
   // "medication_times_per_day" field.
   int? _medicationTimesPerDay;
@@ -193,6 +186,16 @@ class UserRegisteredMedicationStruct extends BaseStruct {
 
   bool hasMedId() => _medId != null;
 
+  // "medication_day_interval" field.
+  int? _medicationDayInterval;
+  int get medicationDayInterval => _medicationDayInterval ?? 0;
+  set medicationDayInterval(int? val) => _medicationDayInterval = val;
+
+  void incrementMedicationDayInterval(int amount) =>
+      medicationDayInterval = medicationDayInterval + amount;
+
+  bool hasMedicationDayInterval() => _medicationDayInterval != null;
+
   static UserRegisteredMedicationStruct fromMap(Map<String, dynamic> data) =>
       UserRegisteredMedicationStruct(
         label: data['label'] as String?,
@@ -203,7 +206,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         medicationWeekdays: getDataList(data['medication_weekdays']),
         reminderMessage: data['reminder_message'] as String?,
         reminderActive: data['reminder_active'] as bool?,
-        medicationDayInterval: data['medication_day_interval'] as String?,
         medicationTimesPerDay:
             castToType<int>(data['medication_times_per_day']),
         medicationDosage: castToType<int>(data['medication_dosage']),
@@ -214,6 +216,7 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         reminderTimes: getDataList(data['reminder_times']),
         nfcTag: data['nfc_tag'] as String?,
         medId: data['med_id'] as String?,
+        medicationDayInterval: castToType<int>(data['medication_day_interval']),
       );
 
   static UserRegisteredMedicationStruct? maybeFromMap(dynamic data) =>
@@ -230,7 +233,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         'medication_weekdays': _medicationWeekdays,
         'reminder_message': _reminderMessage,
         'reminder_active': _reminderActive,
-        'medication_day_interval': _medicationDayInterval,
         'medication_times_per_day': _medicationTimesPerDay,
         'medication_dosage': _medicationDosage,
         'reminder_start_date': _reminderStartDate,
@@ -240,6 +242,7 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         'reminder_times': _reminderTimes,
         'nfc_tag': _nfcTag,
         'med_id': _medId,
+        'medication_day_interval': _medicationDayInterval,
       }.withoutNulls;
 
   @override
@@ -277,10 +280,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
           _reminderActive,
           ParamType.bool,
         ),
-        'medication_day_interval': serializeParam(
-          _medicationDayInterval,
-          ParamType.String,
-        ),
         'medication_times_per_day': serializeParam(
           _medicationTimesPerDay,
           ParamType.int,
@@ -317,6 +316,10 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         'med_id': serializeParam(
           _medId,
           ParamType.String,
+        ),
+        'medication_day_interval': serializeParam(
+          _medicationDayInterval,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -361,11 +364,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         reminderActive: deserializeParam(
           data['reminder_active'],
           ParamType.bool,
-          false,
-        ),
-        medicationDayInterval: deserializeParam(
-          data['medication_day_interval'],
-          ParamType.String,
           false,
         ),
         medicationTimesPerDay: deserializeParam(
@@ -413,6 +411,11 @@ class UserRegisteredMedicationStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        medicationDayInterval: deserializeParam(
+          data['medication_day_interval'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -430,7 +433,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         listEquality.equals(medicationWeekdays, other.medicationWeekdays) &&
         reminderMessage == other.reminderMessage &&
         reminderActive == other.reminderActive &&
-        medicationDayInterval == other.medicationDayInterval &&
         medicationTimesPerDay == other.medicationTimesPerDay &&
         medicationDosage == other.medicationDosage &&
         reminderStartDate == other.reminderStartDate &&
@@ -439,7 +441,8 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         endDateEnabled == other.endDateEnabled &&
         listEquality.equals(reminderTimes, other.reminderTimes) &&
         nfcTag == other.nfcTag &&
-        medId == other.medId;
+        medId == other.medId &&
+        medicationDayInterval == other.medicationDayInterval;
   }
 
   @override
@@ -452,7 +455,6 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         medicationWeekdays,
         reminderMessage,
         reminderActive,
-        medicationDayInterval,
         medicationTimesPerDay,
         medicationDosage,
         reminderStartDate,
@@ -461,7 +463,8 @@ class UserRegisteredMedicationStruct extends BaseStruct {
         endDateEnabled,
         reminderTimes,
         nfcTag,
-        medId
+        medId,
+        medicationDayInterval
       ]);
 }
 
@@ -473,7 +476,6 @@ UserRegisteredMedicationStruct createUserRegisteredMedicationStruct({
   int? reminderFrequency,
   String? reminderMessage,
   bool? reminderActive,
-  String? medicationDayInterval,
   int? medicationTimesPerDay,
   int? medicationDosage,
   DateTime? reminderStartDate,
@@ -482,6 +484,7 @@ UserRegisteredMedicationStruct createUserRegisteredMedicationStruct({
   bool? endDateEnabled,
   String? nfcTag,
   String? medId,
+  int? medicationDayInterval,
 }) =>
     UserRegisteredMedicationStruct(
       label: label,
@@ -491,7 +494,6 @@ UserRegisteredMedicationStruct createUserRegisteredMedicationStruct({
       reminderFrequency: reminderFrequency,
       reminderMessage: reminderMessage,
       reminderActive: reminderActive,
-      medicationDayInterval: medicationDayInterval,
       medicationTimesPerDay: medicationTimesPerDay,
       medicationDosage: medicationDosage,
       reminderStartDate: reminderStartDate,
@@ -500,4 +502,5 @@ UserRegisteredMedicationStruct createUserRegisteredMedicationStruct({
       endDateEnabled: endDateEnabled,
       nfcTag: nfcTag,
       medId: medId,
+      medicationDayInterval: medicationDayInterval,
     );

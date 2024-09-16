@@ -10,7 +10,6 @@ class ReminderTimesModel extends FlutterFlowModel<ReminderTimesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   DateTime? datePicked1;
   DateTime? datePicked2;
   DateTime? datePicked3;

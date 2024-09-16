@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 
 class MedicationOverviewModel
     extends FlutterFlowModel<MedicationOverviewWidget> {
-  ///  State fields for stateful widgets in this page.
-
-  final unfocusNode = FocusNode();
-
   @override
   void initState(BuildContext context) {}
 

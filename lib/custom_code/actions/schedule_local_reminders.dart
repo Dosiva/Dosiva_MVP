@@ -16,15 +16,15 @@ import 'dart:math';
 //Custom code end
 
 Future scheduleLocalReminders(
-    List<UserRegisteredMedicationStruct> activeMedications) async {
+    List<UserRegisteredMedicationStruct>? activeMedications) async {
   AwesomeNotifications().initialize(
     null,
     [
       NotificationChannel(
-        channelGroupKey: 'scheduled_channel_group',
-        channelKey: 'scheduled',
-        channelName: 'Scheduled notifications',
-        channelDescription: 'Notification channel for scheduled tests',
+        channelGroupKey: 'reminder_channel_group',
+        channelKey: 'reminder',
+        channelName: 'Reminder notifications',
+        channelDescription: 'Notification channel for standard reminders',
         channelShowBadge: true,
         locked: false,
       ),
@@ -43,42 +43,53 @@ Future scheduleLocalReminders(
 
   FFAppState().scheduledReminders.clear();
 
+  int maxNotifications = 60;
+  int remindersPerMedicine = 2;
+  int maxRemindersPerDay = 3;
+  int n = maxNotifications ~/
+      (activeMedications.length * remindersPerMedicine * maxRemindersPerDay);
+
   int id = 0;
-  List<ActiveReminderStruct>? activeReminders;
 
   String urlLandingPage = 'dosiva://dosiva.se/land/';
   String nfcTag = '';
 
 // Schedule everyday reminders
-  if (activeMedications[0].reminderActive == true) {
-    for (int j = 0; j < activeMedications.length; j++) {
-      nfcTag = urlLandingPage + activeMedications[j].medId;
-      if (activeMedications[j].reminderFrequency == 1) {
+  for (int j = 0; j < activeMedications.length; j++) {
+    nfcTag = urlLandingPage + activeMedications[j].medId;
+    if (activeMedications[j].reminderFrequency == 1) {
+      for (int k = 0; k < n; k++) {
         for (int i = 0; i < activeMedications[j].medicationTimesPerDay; i++) {
           await AwesomeNotifications().createNotification(
               content: NotificationContent(
                   id: id,
-                  channelKey: 'scheduled',
+                  channelKey: 'reminder',
                   title: activeMedications[j].label,
                   body: activeMedications[j].label),
               schedule: NotificationCalendar(
+                  year: activeMedications[j].reminderStartDate?.year,
+                  month: activeMedications[j].reminderStartDate?.month,
+                  day: activeMedications[j].reminderStartDate?.day,
                   hour: activeMedications[j].reminderTimes[i].hour,
                   minute: activeMedications[j].reminderTimes[i].minute,
                   second: 00,
                   timeZone: localTimeZone,
                   preciseAlarm: true,
-                  repeats: true));
+                  repeats: false));
+          DateTime reminderTime = activeMedications[j].reminderStartDate;
 
           FFAppState().scheduledReminders.add(ActiveReminderStruct(
               medLabel: activeMedications[j].label,
               notificationId: id,
-              scheduledTime: activeMedications[j].reminderTimes[i],
+              scheduledTime: activeMedications[j].reminderStartDate,
               nfcTag: nfcTag));
 
           id = id + 1;
+          activeMedications[j].reminderStartDate =
+              activeMedications[j].reminderStartDate?.add(Duration(days: 1));
         }
       }
-    }
+    } else if (activeMedications[j].reminderFrequency == 2) {}
   }
 }
 // Set your action name, define your arguments and return parameter,

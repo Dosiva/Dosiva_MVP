@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'label_model.dart';
 export 'label_model.dart';
@@ -25,10 +26,7 @@ class _LabelWidgetState extends State<LabelWidget> {
     _model = createModel(context, () => LabelModel());
 
     _model.textController ??= TextEditingController(
-        text: valueOrDefault<String>(
-      FFAppState().currentMedicationRegistration.label,
-      'Min Medicin',
-    ));
+        text: FFAppState().currentMedicineRegistration.label);
     _model.textFieldFocusNode ??= FocusNode();
   }
 
@@ -111,7 +109,7 @@ class _LabelWidgetState extends State<LabelWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 24.0),
                               child: Text(
-                                'WORK IN PROGRESS',
+                                'Kommer snart!',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -271,6 +269,14 @@ class _LabelWidgetState extends State<LabelWidget> {
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
+                              maxLength: 30,
+                              maxLengthEnforcement:
+                                  MaxLengthEnforcement.enforced,
+                              buildCounter: (context,
+                                      {required currentLength,
+                                      required isFocused,
+                                      maxLength}) =>
+                                  null,
                               validator: _model.textControllerValidator
                                   .asValidator(context),
                             ),
@@ -295,7 +301,7 @@ class _LabelWidgetState extends State<LabelWidget> {
                             child: FFButtonWidget(
                               onPressed: () async {
                                 FFAppState()
-                                    .updateCurrentMedicationRegistrationStruct(
+                                    .updateCurrentMedicineRegistrationStruct(
                                   (e) => e..label = _model.textController.text,
                                 );
 

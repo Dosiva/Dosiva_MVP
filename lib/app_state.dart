@@ -23,8 +23,8 @@ class FFAppState extends ChangeNotifier {
           prefs.getInt('ff_recentNotificationID') ?? _recentNotificationID;
     });
     _safeInit(() {
-      _activeMedications = prefs
-              .getStringList('ff_activeMedications')
+      _userRegisteredMedicine = prefs
+              .getStringList('ff_userRegisteredMedicine')
               ?.map((x) {
                 try {
                   return UserRegisteredMedicationStruct.fromSerializableMap(
@@ -36,7 +36,7 @@ class FFAppState extends ChangeNotifier {
               })
               .withoutNulls
               .toList() ??
-          _activeMedications;
+          _userRegisteredMedicine;
     });
     _safeInit(() {
       _scheduledReminders = prefs
@@ -59,7 +59,7 @@ class FFAppState extends ChangeNotifier {
               .getStringList('ff_medicationHistory')
               ?.map((x) {
                 try {
-                  return ActiveReminderStruct.fromSerializableMap(
+                  return MedicationEventStruct.fromSerializableMap(
                       jsonDecode(x));
                 } catch (e) {
                   print("Can't decode persisted data type. Error: $e.");
@@ -92,62 +92,62 @@ class FFAppState extends ChangeNotifier {
     _scannedNFCTag = value;
   }
 
-  List<UserRegisteredMedicationStruct> _activeMedications = [];
-  List<UserRegisteredMedicationStruct> get activeMedications =>
-      _activeMedications;
-  set activeMedications(List<UserRegisteredMedicationStruct> value) {
-    _activeMedications = value;
+  List<UserRegisteredMedicationStruct> _userRegisteredMedicine = [];
+  List<UserRegisteredMedicationStruct> get userRegisteredMedicine =>
+      _userRegisteredMedicine;
+  set userRegisteredMedicine(List<UserRegisteredMedicationStruct> value) {
+    _userRegisteredMedicine = value;
     prefs.setStringList(
-        'ff_activeMedications', value.map((x) => x.serialize()).toList());
+        'ff_userRegisteredMedicine', value.map((x) => x.serialize()).toList());
   }
 
-  void addToActiveMedications(UserRegisteredMedicationStruct value) {
-    activeMedications.add(value);
-    prefs.setStringList('ff_activeMedications',
-        _activeMedications.map((x) => x.serialize()).toList());
+  void addToUserRegisteredMedicine(UserRegisteredMedicationStruct value) {
+    userRegisteredMedicine.add(value);
+    prefs.setStringList('ff_userRegisteredMedicine',
+        _userRegisteredMedicine.map((x) => x.serialize()).toList());
   }
 
-  void removeFromActiveMedications(UserRegisteredMedicationStruct value) {
-    activeMedications.remove(value);
-    prefs.setStringList('ff_activeMedications',
-        _activeMedications.map((x) => x.serialize()).toList());
+  void removeFromUserRegisteredMedicine(UserRegisteredMedicationStruct value) {
+    userRegisteredMedicine.remove(value);
+    prefs.setStringList('ff_userRegisteredMedicine',
+        _userRegisteredMedicine.map((x) => x.serialize()).toList());
   }
 
-  void removeAtIndexFromActiveMedications(int index) {
-    activeMedications.removeAt(index);
-    prefs.setStringList('ff_activeMedications',
-        _activeMedications.map((x) => x.serialize()).toList());
+  void removeAtIndexFromUserRegisteredMedicine(int index) {
+    userRegisteredMedicine.removeAt(index);
+    prefs.setStringList('ff_userRegisteredMedicine',
+        _userRegisteredMedicine.map((x) => x.serialize()).toList());
   }
 
-  void updateActiveMedicationsAtIndex(
+  void updateUserRegisteredMedicineAtIndex(
     int index,
     UserRegisteredMedicationStruct Function(UserRegisteredMedicationStruct)
         updateFn,
   ) {
-    activeMedications[index] = updateFn(_activeMedications[index]);
-    prefs.setStringList('ff_activeMedications',
-        _activeMedications.map((x) => x.serialize()).toList());
+    userRegisteredMedicine[index] = updateFn(_userRegisteredMedicine[index]);
+    prefs.setStringList('ff_userRegisteredMedicine',
+        _userRegisteredMedicine.map((x) => x.serialize()).toList());
   }
 
-  void insertAtIndexInActiveMedications(
+  void insertAtIndexInUserRegisteredMedicine(
       int index, UserRegisteredMedicationStruct value) {
-    activeMedications.insert(index, value);
-    prefs.setStringList('ff_activeMedications',
-        _activeMedications.map((x) => x.serialize()).toList());
+    userRegisteredMedicine.insert(index, value);
+    prefs.setStringList('ff_userRegisteredMedicine',
+        _userRegisteredMedicine.map((x) => x.serialize()).toList());
   }
 
-  UserRegisteredMedicationStruct _currentMedicationRegistration =
+  UserRegisteredMedicationStruct _currentMedicineRegistration =
       UserRegisteredMedicationStruct.fromSerializableMap(jsonDecode(
-          '{\"medicationWeekdays\":\"[\\\"true\\\",\\\"false\\\",\\\"false\\\",\\\"true\\\",\\\"false\\\",\\\"false\\\",\\\"false\\\"]\"}'));
-  UserRegisteredMedicationStruct get currentMedicationRegistration =>
-      _currentMedicationRegistration;
-  set currentMedicationRegistration(UserRegisteredMedicationStruct value) {
-    _currentMedicationRegistration = value;
+          '{\"medication_weekdays\":\"[]\",\"reminder_times\":\"[]\"}'));
+  UserRegisteredMedicationStruct get currentMedicineRegistration =>
+      _currentMedicineRegistration;
+  set currentMedicineRegistration(UserRegisteredMedicationStruct value) {
+    _currentMedicineRegistration = value;
   }
 
-  void updateCurrentMedicationRegistrationStruct(
+  void updateCurrentMedicineRegistrationStruct(
       Function(UserRegisteredMedicationStruct) updateFn) {
-    updateFn(_currentMedicationRegistration);
+    updateFn(_currentMedicineRegistration);
   }
 
   List<ActiveReminderStruct> _scheduledReminders = [];
@@ -204,21 +204,21 @@ class FFAppState extends ChangeNotifier {
     _currentMedicationIndexSet = value;
   }
 
-  List<ActiveReminderStruct> _medicationHistory = [];
-  List<ActiveReminderStruct> get medicationHistory => _medicationHistory;
-  set medicationHistory(List<ActiveReminderStruct> value) {
+  List<MedicationEventStruct> _medicationHistory = [];
+  List<MedicationEventStruct> get medicationHistory => _medicationHistory;
+  set medicationHistory(List<MedicationEventStruct> value) {
     _medicationHistory = value;
     prefs.setStringList(
         'ff_medicationHistory', value.map((x) => x.serialize()).toList());
   }
 
-  void addToMedicationHistory(ActiveReminderStruct value) {
+  void addToMedicationHistory(MedicationEventStruct value) {
     medicationHistory.add(value);
     prefs.setStringList('ff_medicationHistory',
         _medicationHistory.map((x) => x.serialize()).toList());
   }
 
-  void removeFromMedicationHistory(ActiveReminderStruct value) {
+  void removeFromMedicationHistory(MedicationEventStruct value) {
     medicationHistory.remove(value);
     prefs.setStringList('ff_medicationHistory',
         _medicationHistory.map((x) => x.serialize()).toList());
@@ -232,14 +232,15 @@ class FFAppState extends ChangeNotifier {
 
   void updateMedicationHistoryAtIndex(
     int index,
-    ActiveReminderStruct Function(ActiveReminderStruct) updateFn,
+    MedicationEventStruct Function(MedicationEventStruct) updateFn,
   ) {
     medicationHistory[index] = updateFn(_medicationHistory[index]);
     prefs.setStringList('ff_medicationHistory',
         _medicationHistory.map((x) => x.serialize()).toList());
   }
 
-  void insertAtIndexInMedicationHistory(int index, ActiveReminderStruct value) {
+  void insertAtIndexInMedicationHistory(
+      int index, MedicationEventStruct value) {
     medicationHistory.insert(index, value);
     prefs.setStringList('ff_medicationHistory',
         _medicationHistory.map((x) => x.serialize()).toList());

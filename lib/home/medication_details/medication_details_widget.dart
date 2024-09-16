@@ -66,7 +66,7 @@ class _MedicationDetailsWidgetState extends State<MedicationDetailsWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Profil',
+              'Översikt',
               style: FlutterFlowTheme.of(context).headlineSmall.override(
                     fontFamily: 'Sora',
                     letterSpacing: 0.0,
@@ -520,7 +520,8 @@ class _MedicationDetailsWidgetState extends State<MedicationDetailsWidget> {
                                               Text(
                                                 valueOrDefault<String>(
                                                   widget.medicationInformation
-                                                      ?.medicationDayInterval,
+                                                      ?.medicationDayInterval
+                                                      .toString(),
                                                   'x',
                                                 ),
                                                 style:
@@ -848,7 +849,7 @@ class _MedicationDetailsWidgetState extends State<MedicationDetailsWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              FFAppState().currentMedicationRegistration =
+                              FFAppState().currentMedicineRegistration =
                                   widget.medicationInformation!;
                               FFAppState().currentActiveMedicationIndex =
                                   widget.index!;
