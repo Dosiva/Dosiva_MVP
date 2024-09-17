@@ -14,10 +14,12 @@ int? getMedicationIndex(
   List<UserRegisteredMedicationStruct>? medicationList,
   String? medId,
 ) {
+  String? n = medId;
+  List<UserRegisteredMedicationStruct>? m = medicationList;
   // Find the index of the medicationList item that contains the unique medID string
-  if (medicationList != null && medId != null) {
-    for (int i = 0; i < medicationList.length; i++) {
-      if (medicationList[i].medId == medId) {
+  if (m != null && n != null) {
+    for (int i = 0; i < m.length; i++) {
+      if (m[i].medId == n) {
         return i;
       }
     }

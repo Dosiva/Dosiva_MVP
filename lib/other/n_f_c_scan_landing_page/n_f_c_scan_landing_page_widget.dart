@@ -2,7 +2,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'n_f_c_scan_landing_page_model.dart';
 export 'n_f_c_scan_landing_page_model.dart';
 
@@ -39,6 +41,8 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -111,10 +115,13 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                             ),
                           ),
                           Text(
-                            valueOrDefault<String>(
-                              widget.medid,
-                              'test',
-                            ),
+                            functions
+                                .getMedicationIndex(
+                                    FFAppState()
+                                        .userRegisteredMedicine
+                                        .toList(),
+                                    widget.medid)
+                                .toString(),
                             style:
                                 FlutterFlowTheme.of(context).bodyLarge.override(
                                       fontFamily: 'Inter',
