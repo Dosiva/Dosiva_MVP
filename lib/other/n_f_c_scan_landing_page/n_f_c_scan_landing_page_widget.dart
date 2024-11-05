@@ -2,9 +2,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'n_f_c_scan_landing_page_model.dart';
 export 'n_f_c_scan_landing_page_model.dart';
 
@@ -41,8 +39,6 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -105,7 +101,7 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 16.0),
                             child: Text(
-                              'Medicin registrerad!',
+                              'D-vitamin registrerad',
                               style: FlutterFlowTheme.of(context)
                                   .headlineSmall
                                   .override(
@@ -115,13 +111,7 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                             ),
                           ),
                           Text(
-                            functions
-                                .getMedicationIndex(
-                                    FFAppState()
-                                        .userRegisteredMedicine
-                                        .toList(),
-                                    widget.medid)
-                                .toString(),
+                            'Bra jobbat, du har tagit D-vitamin i tid!',
                             style:
                                 FlutterFlowTheme.of(context).bodyLarge.override(
                                       fontFamily: 'Inter',
@@ -130,6 +120,49 @@ class _NFCScanLandingPageWidgetState extends State<NFCScanLandingPageWidget> {
                           ),
                         ],
                       ),
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(0.0, 1.0),
+                child: Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.pushNamed(
+                        'Home',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: const TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.rightToLeft,
+                            duration: Duration(milliseconds: 400),
+                          ),
+                        },
+                      );
+                    },
+                    text: 'Se min statistik',
+                    options: FFButtonOptions(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: 40.0,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).secondary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Inter',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                letterSpacing: 0.0,
+                              ),
+                      elevation: 3.0,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(24.0),
                     ),
                   ),
                 ),

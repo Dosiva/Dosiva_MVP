@@ -19,7 +19,7 @@ int? getMedicationIndex(
   // Find the index of the medicationList item that contains the unique medID string
   if (m != null && n != null) {
     for (int i = 0; i < m.length; i++) {
-      if (m[i].medId == n) {
+      if (m[i].nfcTag == "dosiva://dosiva.se/land/" + n) {
         return i;
       }
     }

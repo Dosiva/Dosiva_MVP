@@ -28,7 +28,10 @@ Future<void> scanNFCTag() async {
 
   try {
     // Poll for the NFC tag
-    NFCTag tag = await FlutterNfcKit.poll();
+    NFCTag tag = await FlutterNfcKit.poll(
+        timeout: Duration(seconds: 10),
+        iosMultipleTagMessage: "Multiple tags found!",
+        iosAlertMessage: "Scan your tag");
     updateNfcTagInAppState(appState, tag);
   } catch (e) {
     print('Error scanning NFC tag: $e');

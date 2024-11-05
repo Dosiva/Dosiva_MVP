@@ -92,7 +92,7 @@ class _StatisticsWidgetState extends State<StatisticsWidget>
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          'X %',
+                          '78 %',
                           style:
                               FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Sora',
@@ -122,7 +122,7 @@ class _StatisticsWidgetState extends State<StatisticsWidget>
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
-                        'Y st',
+                        '3 st',
                         style: FlutterFlowTheme.of(context).titleLarge.override(
                               fontFamily: 'Sora',
                               letterSpacing: 0.0,
@@ -171,7 +171,7 @@ class _StatisticsWidgetState extends State<StatisticsWidget>
                         unselectedLabelStyle: const TextStyle(),
                         labelColor: FlutterFlowTheme.of(context).primaryText,
                         unselectedLabelColor:
-                            FlutterFlowTheme.of(context).secondaryText,
+                            FlutterFlowTheme.of(context).primaryText,
                         backgroundColor:
                             FlutterFlowTheme.of(context).secondaryBackground,
                         unselectedBackgroundColor:
